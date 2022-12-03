@@ -51,6 +51,9 @@ class Post(models.Model):
     text = models.TextField()
     rating = models.SmallIntegerField(default=0)
 
+    def __str__(self):
+        return self.header
+
     def preview(self):
         return f'{self.text[:123]}...'
 
