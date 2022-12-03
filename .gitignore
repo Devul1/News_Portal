@@ -1,0 +1,3 @@
+/.gitigore
+/venv
+**/__pycache__
