@@ -9,6 +9,9 @@ class Author(models.Model):
     userAuthor = models.OneToOneField(User, on_delete=models.CASCADE)
     rating = models.SmallIntegerField(default=0)
 
+    def __str__(self):
+        return self.userAuthor.username
+
     def update_rating(self):
         post_rating = self.post_set.aggregate(ratingSum=Sum('rating')).get('ratingSum')
         if post_rating is None:
@@ -31,6 +34,9 @@ class Author(models.Model):
 
 class Category(models.Model):
     title = models.CharField(max_length=64, unique=True)
+
+    def __str__(self):
+        return self.title
 
 
 class Post(models.Model):
@@ -77,6 +83,9 @@ class Comment(models.Model):
     text = models.TextField()
     time = models.DateTimeField(auto_now_add=True)
     rating = models.SmallIntegerField(default=0)
+
+    def __str__(self):
+        return self.text
 
     def like(self):
         self.rating += 1
