@@ -7,7 +7,7 @@ Post
 {% endblock title %}
 
 {% block content %}
-<h1>{{ post.header.title|censor }}</h1>
+<h1>{{ post.header.title }}</h1>
 <hr>
 <table>
     <tr>
@@ -16,9 +16,9 @@ Post
         <td>Text</td>
     </tr>
     <tr>
-        <td>{{ post.header|censor }}</td>
+        <td>{{ post.header }}</td>
         <td>{{ post.time|date:'d M Y' }}</td>
-        <td>{{ post.text|censor }}</td>
+        <td>{{ post.text }}</td>
     </tr>
 </table>
 {% endblock content %}
