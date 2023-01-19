@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Sum
+from django.urls import reverse
 
 # Create your models here.
 
@@ -10,7 +11,7 @@ class Author(models.Model):
     rating = models.SmallIntegerField(default=0)
 
     def __str__(self):
-        return self.userAuthor.username
+        return f'{self.userAuthor.username}'
 
     def update_rating(self):
         post_rating = self.post_set.aggregate(ratingSum=Sum('rating')).get('ratingSum')
@@ -36,7 +37,7 @@ class Category(models.Model):
     title = models.CharField(max_length=64, unique=True)
 
     def __str__(self):
-        return self.title
+        return f'{self.title}'
 
 
 class Post(models.Model):
@@ -46,8 +47,8 @@ class Post(models.Model):
     article = 'AR'
 
     CATEGORY_CHOICES = [
-        (news, 'Новость'),
-        (article, 'Статья'),
+        (news, 'News'),
+        (article, 'Article'),
     ]
     
     category_type = models.CharField(max_length=2, choices=CATEGORY_CHOICES, default=news)
@@ -57,8 +58,11 @@ class Post(models.Model):
     text = models.TextField()
     rating = models.SmallIntegerField(default=0)
 
+    def get_absolute_url(self):
+        return reverse('post_detail', args=[str(self.id)])
+
     def __str__(self):
-        return self.header
+        return f'{self.header}'
 
     def preview(self):
         return f'{self.text[:123]}...'
@@ -85,7 +89,7 @@ class Comment(models.Model):
     rating = models.SmallIntegerField(default=0)
 
     def __str__(self):
-        return self.text
+        return f'{self.text}'
 
     def like(self):
         self.rating += 1

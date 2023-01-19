@@ -4,15 +4,15 @@
 {% load custom_tags %}
 
 {% block title %}
-Posts
+Search news
 {% endblock title %}
 
 {% block content %}
-<h1>All news</h1>
-<br>
-<h3>Total news - {{ all_posts|length }}</h3>
-<hr>
-<a href="search/">Search</a>
+<h3>{{ posts|length }} news are shown on this page</h3>
+<form action="" method="get">
+    {{ filterset.form.as_p }}
+    <input type="submit" value="Search" />
+</form>
 <hr>
 {% if posts %}
     <table>
@@ -30,7 +30,7 @@ Posts
         {% endfor %}
     </table>
 {% else %}
-<h2>There is no news</h2>
+<h2>There is no such news</h2>
 {% endif %}
 
 {% if page_obj.has_previous %}

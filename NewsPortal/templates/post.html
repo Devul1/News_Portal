@@ -1,9 +1,7 @@
 {% extends 'flatpages/default.html' %}
 
-{% load custom_filters %}
-
 {% block title %}
-Post
+{{ post.header }}
 {% endblock title %}
 
 {% block content %}
@@ -11,9 +9,9 @@ Post
 <hr>
 <table>
     <tr>
-        <td>Header</td>
-        <td>Publication date</td>
-        <td>Text</td>
+        <td><b>Header</b></td>
+        <td><b>Publication date</b></td>
+        <td><b>Text</b></td>
     </tr>
     <tr>
         <td>{{ post.header }}</td>
