@@ -48,7 +48,7 @@ class PostSearch(ListView):
 class PostCreate(CreateView):
     form_class = PostForm
     model = Post
-    template_name = 'post_edit.html'
+    template_name = 'post_create.html'
 
 
 class PostEdit(UpdateView):
