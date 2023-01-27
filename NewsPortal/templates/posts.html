@@ -12,25 +12,41 @@ Posts
 <br>
 <h3>Total news - {{ all_posts|length }}</h3>
 <hr>
-<a href="search/">Search</a>
+<a href="{% url 'post_search' %}">Search</a>
 <hr>
+{% if perms.news.add_post %}
+    <p><a href="{% url 'post_create' %}">Add post</a></p>
+{% endif %}
 {% if posts %}
     <table>
         <tr>
             <td><b>Header</b></td>
             <td><b>Publication date</b></td>
             <td><b>Text</b></td>
+            <td>
+                {% if perms.news.change_post or perms.news.delete_post %}
+                    <b>Actions</b>
+                {% endif %}
+            </td>
         </tr>
         {% for post in posts %}
             <tr>
-                <td>{{ post.header|censor }}</td>
+                <td><a href="{% url 'post_detail' post.id %}">{{ post.header|censor }}</a></td>
                 <td>{{ post.time|date:'d M Y' }}</td>
                 <td>{{ post.text|truncatewords:20|censor }}</td>
+                <td>
+                    {% if perms.news.change_post %}
+                        <a href="{% url 'post_edit' post.id %}">Edit</a> 
+                    {% endif %}
+                    {% if perms.news.delete_post %}
+                        <a href="{% url 'post_delete' post.id %}">Delete</a>
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
     </table>
 {% else %}
-<h2>There is no news</h2>
+    <h2>There is no news</h2>
 {% endif %}
 
 {% if page_obj.has_previous %}
