@@ -12,10 +12,10 @@ Posts
 <br>
 <h3>Total news - {{ all_posts|length }}</h3>
 <hr>
-<a href="{% url 'post_search' %}">Search</a>
+<a href="{% url 'post_search' %}" class="btn btn-primary" role="button">Search</a>
 <hr>
 {% if perms.news.add_post %}
-    <p><a href="{% url 'post_create' %}">Add post</a></p>
+    <p><a href="{% url 'post_create' %}" class="btn btn-primary" role="button">Add post</a></p>
 {% endif %}
 {% if posts %}
     <table>

@@ -7,16 +7,14 @@
 {% block content %}
 <h1>{{ post.header.title }}</h1>
 <hr>
-<table>
-    <tr>
-        <td><b>Header</b></td>
-        <td><b>Publication date</b></td>
-        <td><b>Text</b></td>
-    </tr>
-    <tr>
-        <td>{{ post.header }}</td>
-        <td>{{ post.time|date:'d M Y' }}</td>
-        <td>{{ post.text }}</td>
-    </tr>
-</table>
+<h3>Publication date: {{ post.time|date:'d M Y' }}</h3>
+{% for category in post.categories.all %}
+    <h5>{{ category }}<br></h5>
+{% endfor %}
+<hr>
+{{ post.text }}
+<hr>
+<p style="text-align: right;">{{ post.author }}</p>
+
+
 {% endblock content %}

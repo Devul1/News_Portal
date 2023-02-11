@@ -1,0 +1,12 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Profile
+{% endblock title %}
+
+{% block content %}
+<h2>{{ user.username }}</h2>
+<hr>
+<h3><a href="{% url 'subscriptions' %}">Subscriptions</a></h3>
+<h4><a href="/accounts/logout">Sign out</a></h4>
+{% endblock content %}
